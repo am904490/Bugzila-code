@@ -1,0 +1,28 @@
+
+ <% if user_signed_in? %>
+
+<%= current_user.usertype %>
+<%= current_user.name %>
+<table>
+  <% if @projects %>
+  <% @projects.each do |project| %>
+    <tr>
+      <td><%= link_to project.name, project_path(project) %></td>
+       <%= f.label :developer %><br />
+     <%= f.select :developer, [project.developer]%>
+     <%= f.label :qa %><br />
+     <%= f.select :qa, [project.qa]%>
+      <td><%= button_to 'Edit', edit_project_path(project), method: 'get'%></td>
+      <td><%= button_to 'Remove', project_path(project), method: 'delete', data: { confirm: 'Are you sure?' } %></td>
+  <% end %>
+   <% else %>
+      <p>There is no Project </p>
+      <% end %>
+</table>
+<%= link_to "Add a New Project",  new_project_path %>
+<button><%= link_to "Log out", destroy_user_session_path, method: :delete %></button>
+ <% else %>
+   <button> <%= link_to "login", new_user_session_path %> </button>
+   <button> <%= link_to "Sign Up" , new_user_registration_path %> </button>
+
+<% end %>

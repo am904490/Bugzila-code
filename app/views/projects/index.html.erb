@@ -1,0 +1,37 @@
+<% if user_signed_in? %>
+  <%= current_user.usertype %>
+  <%= current_user.name %>
+
+  <table>
+  <% if @projects %>
+   <% @projects.each do |project| %>
+  <tr>
+    <%= form_for :project do |f| %>
+      <td><%= link_to project.name, project_path(project) %></td>
+    <% if can? :update, Project %>
+      <td><%= link_to "Edit", edit_project_path(project) %></td>
+    <% end %>
+    <% if can? :destroy, Project %>
+      <td><%= link_to 'Remove', project_path(project), method: 'delete', data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
+    <% if can? :create, Bug %>
+      <td><%= link_to 'Add Bug' , new_project_bug_path(project)   %></td>
+    <% end %>
+    <% if can? :read, Bug %>
+      <td><%= link_to 'Show Bugs' , project_bugs_path(project)   %></td>
+    <% end %> 
+  </tr>
+  <% end %>
+  <% end %>
+  <% else %>
+  <p>There is no Project </p> 
+  <% end %>
+ </table>
+ <% if can? :create, Project %>
+      <%= link_to "Add a New Project",  new_project_path %>
+ <% end %>
+<button><%= link_to "Log out", destroy_user_session_path, method: :delete %></button>
+ <% else %>
+   <button> <%= link_to "login", new_user_session_path %> </button>
+   <button> <%= link_to "Sign Up" , new_user_registration_path %> </button>
+ <% end %>

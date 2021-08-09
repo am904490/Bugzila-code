@@ -1,0 +1,18 @@
+<%= form_for([@project , @bug], multipart: true) do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :discription %>
+  <%= f.text_area :discription %>
+  <%=  f.label :deadline %>
+  <%=  f.text_field :deadline %>
+  <%= f.label :type %>
+  <%= f.select :bug_type, [ 'feature', 'bug' ], :prompt => 'Select One',  :id =>" bugtype" %>
+  <%= f.label :status %>
+  <%= f.select :status, ['new_bug' , 'started' , 'completed' , 'resolved' ] , :id => "status" %>
+  <%= f.label :user_id %> <br>
+  <%= f.select :user_id, options_for_select(@developers), multiple: true, size: 10 %><br>
+  <%= f.label :image %>
+  <%= f.file_field :image %>
+  <%= f.submit %>      
+  <%= javascript_pack_tag 'my_js' %>
+<% end %>

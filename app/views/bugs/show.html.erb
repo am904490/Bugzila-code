@@ -1,0 +1,16 @@
+<% if  @bug %>
+    <b><p>Title</p></b>
+    <%= @bug.title %> 
+    <b><p>Description</p></b>
+    <%= @bug.discription %>
+    <b><p>Deadline</p></b>
+    <%= @bug.deadline%> 
+    <b><p>Status</p></b>
+    <%= @bug.status %>
+    <b><p>Bug Type</p></b>
+    <%= @bug.bug_type %>  
+    <b><p>Developer</p></b>
+    <%= @user.name  %>
+    <b><p>Image</p></b>
+    <%= image_tag(@bug.image.url, alt: 'Image') if @bug.image? %>
+<% end %>

@@ -1,0 +1,9 @@
+<%= form_for @project do |f| %>
+  <%= f.label 'Name' %><br>
+  <%= f.text_field :name %><br>
+  <%= f.label 'Developer' %><br>                                                 
+  <%= select_tag 'developer_ids[]', options_for_select(User.developer.collect {|p| [ p.name, p.id ] }, @developer_ids), multiple: true, size: 10 %><br>
+  <%= f.label 'qa' %><br>                                              
+  <%= select_tag 'qa_ids[]', options_for_select(User.qa.collect {|p| [ p.name, p.id ] }, @qa_ids), multiple: true, size: 10 %>             
+  <%= f.submit "Create" %>
+<% end %>

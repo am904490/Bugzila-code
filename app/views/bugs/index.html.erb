@@ -1,0 +1,13 @@
+<% if @bugs %>
+  <% @bugs.each do |bug| %>
+    <%= bug.title %> 
+    <% if can? :update, Bug %>
+      <%= link_to "Edit" ,  edit_project_bug_path(@project, bug) %>
+    <% end %>
+    
+    <%= link_to "Show" ,  project_bug_path(@project, bug) %> 
+    <% if can? :destroy  , Bug %>
+      <%= link_to 'Remove', project_bug_path(@project , bug), method: 'delete', data: { confirm: 'Are you sure?' } %>   
+    <% end %>   
+  <% end %>
+<% end %>
